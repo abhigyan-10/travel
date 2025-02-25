@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-7!y8loocvq3=#bv1($t)39l0i&2z9#ujket1p^e1so0exq*jb='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['travel-cwgb.onrender.com']
 
@@ -82,11 +82,11 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'travel',
-        'USER': 'postgres',
-        'PASSWORD' : 'abhi2005',
-        'HOST' : 'localhost',
-        'PORT' : '5432',
+        'NAME': os.environ.get('travel'),
+        'USER': os.environ.get('postgres'),
+        'PASSWORD' : os.environ.get('abhi2005'),
+        'HOST' : os.environ.get('localhost'),
+        'PORT' : os.environ.get('5432'),
     }
 }
 
