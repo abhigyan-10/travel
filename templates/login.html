@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogIn</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://www.shutterstock.com/shutterstock/videos/1111267475/thumb/1.jpg?ip=x480') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+        .overlay {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            text-align: center;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            display: block;
+        }
+        
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        input[type="submit"]:hover {
+            background: #0056b3;
+        }
+        
+        h3 {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+
+
+    <div class="overlay">
+        {% if request.GET.next %}
+            <p class="error">You must log in to perform this action.</p>
+        {% endif %}
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username"><br>
+            <input type="password" name="password" placeholder="Password"><br>
+            <input type="submit" value="Login">
+            <p>New User?<a href="{% url 'register' %}">Register here</a></p>
+        </form>
+
+        <div>
+            {% for message in messages %}
+                {% if "booking" not in message.tags %}
+                    <script>
+                        Swal.fire({
+                            title: "Notification",
+                            text: "{{ message }}",
+                            icon: "info",
+                            confirmButtonText: "OK"
+                        });
+                    </script>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

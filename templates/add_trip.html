@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Trip</title>
+    <style>
+        
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Add Trip Page Background */
+.add-trip-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+    background-image: url("https://img.freepik.com/premium-photo/travel-illustration-with-beige-background_123891-34607.jpg"); /* Background image */
+    background-size: cover; /* Cover the entire container */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repeating */
+}
+
+/* Form Container */
+.add-trip-form {
+    background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent white background */
+    padding: 20px; /* Compact padding */
+    border-radius: 8px; /* Slightly smaller border radius */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Align all text to the left */
+    max-width: 400px; /* Reduced max-width */
+    width: 100%;
+}
+
+.add-trip-form h1 {
+    font-size: 1.5rem; /* Smaller font size */
+    color: #007bff;
+    margin-bottom: 15px; /* Reduced margin */
+    text-align: center; /* Center-align the heading */
+}
+
+/* Form Styling */
+.add-trip-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Reduced gap between fields */
+}
+
+.add-trip-form input,
+.add-trip-form textarea,
+.add-trip-form button {
+    width: 100%;
+    padding: 8px; /* Reduced padding */
+    border: 1px solid #ccc;
+    border-radius: 4px; /* Slightly smaller border radius */
+    font-size: 14px; /* Smaller font size */
+}
+
+.add-trip-form textarea {
+    resize: none; /* Disable resizing of textarea */
+    height: 80px; /* Fixed height for compactness */
+}
+
+.add-trip-form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px; /* Compact padding */
+    font-size: 14px; /* Smaller font size */
+    transition: background-color 0.3s ease;
+}
+
+.add-trip-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Back to Home Link */
+a{
+    display: block; /* Make it a block element */
+    margin-top: 10px; /* Space above the link */
+    text-align: center; /* Center-align the link */
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    font-size: 14px; /* Smaller font size */
+}
+
+.back-to-home:hover {
+    text-decoration: underline;
+}
+    </style>
+</head>
+<body>
+    <!-- Full-Screen Background -->
+    <div class="add-trip-container">
+        <div class="add-trip-form">
+            <h1>Share Your Recent Trip</h1>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit</button>
+            </form>
+            <a class="back-to-home" href="{% url 'index' %}">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

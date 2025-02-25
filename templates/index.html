@@ -1,0 +1,932 @@
+{% load static %}
+{% static "img/place" as baseUrl %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Travelo</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="{%static 'img/favicon.png'%}">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{%static 'css/owl.carousel.min.css'%}">
+    <link rel="stylesheet" href="{%static 'css/magnific-popup.css'%}">
+    <link rel="stylesheet" href="{%static 'css/font-awesome.min.css'%}">
+    <link rel="stylesheet" href="{%static 'css/themify-icons.css'%}">
+    <link rel="stylesheet" href="{%static 'css/nice-select.css'%}">
+    <link rel="stylesheet" href="{%static 'css/flaticon.css'%}">
+    <link rel="stylesheet" href="{%static 'css/gijgo.css'%}">
+    <link rel="stylesheet" href="{%static 'css/animate.css'%}">
+    <link rel="stylesheet" href="{%static 'css/slick.css'%}">
+    <link rel="stylesheet" href="{%static 'css/slicknav.css'%}">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+
+    <style>
+        .testimonial_area {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          }
+          
+          /* Left Side: Review List (70%) */
+          .review-container {
+            display: flex;
+            width: 100%;
+          }
+          
+          .review-list {
+            flex: 60%; /* Takes 70% of the container */
+            overflow-y: auto; /* Enable scrolling if content overflows */
+            max-height: 500px; /* Set a maximum height for the slider */
+            padding-right: 20px;
+            border-right: 1px solid #ddd; /* Add a divider between the two sections */
+          }
+          
+          .review-box {
+            background-color: #F4F4F4;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            position: relative;
+          }
+          
+          .review-box p {
+            margin: 5px 0;
+          }
+          
+          .review-box small {
+            color: #888888;
+          }
+          
+          .review-box button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #ACACAC;
+          }
+          
+          .review-box button:hover {
+            color: #0056b3;
+          }
+          
+          /* Right Side: Review Form (30%) */
+          .review-form {
+            flex: 30%; /* Takes 30% of the container */
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          }
+          
+          .review-form h3 {
+            margin-bottom: 15px;
+            text-align: center;
+          }
+          
+          .review-form textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+            margin-bottom: 15px;
+          }
+          
+          .review-form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+          }
+          
+          .review-form button:hover {
+            background-color: #0056b3;
+          }
+          
+          /* Slider Styling */
+          .review-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Space between reviews */
+          }
+          
+          /* Responsive Design */
+          @media (max-width: 768px) {
+            .testimonial_area {
+                flex-direction: column;
+            }
+          
+            .review-list,
+            .review-form {
+                flex: 100%; /* Full width on smaller screens */
+                padding: 0;
+                border-right: none;
+            }
+          
+            .review-form {
+                margin-top: 20px;
+            }
+          }
+
+          /* General Reset */
+
+/* Title Container */
+.title-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.title-container h1 {
+    font-size: 2.5rem;
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* Trip Cards Container */
+.trip-cards {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping to the next row if there's not enough space */
+    gap: 20px; /* Space between cards */
+    justify-content: center; /* Center cards horizontally */
+    max-width: 1200px; /* Limit the width of the container */
+    margin: 0 auto; /* Center the container */
+}
+
+/* Individual Trip Card */
+.trip-card {
+    display: flex;
+    flex-direction: column; /* Stack thumbnail and info vertically within each card */
+    align-items: center; /* Center items inside the card */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 300px; /* Fixed width for each card */
+}
+
+.trip-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Thumbnail */
+.card-thumb img {
+    width: 100%; /* Make the image fill the card width */
+    height: 150px; /* Fixed height for consistency */
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px; /* Space between image and text */
+}
+
+/* Card Info */
+.card-info {
+    text-align: center; /* Center-align all text inside the card */
+}
+
+.card-date {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.card-info h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.card-info p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+/* No Trips Message */
+.no-trips {
+    text-align: center;
+    font-size: 16px;
+    color: #888;
+}
+
+/* Add Trip Link */
+.add-trip-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.add-trip-link a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.add-trip-link a:hover {
+    text-decoration: underline;
+}
+
+/* Background Image for Slide 1 */
+.slider_bg_1 {
+    background-image: url("https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2020/04/Kolkata-feature-1.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Background Image for Slide 2 */
+.slider_bg_2 {
+    background-image: url("https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/12/d3/17/bandra-worli-sea-link.jpg?w=900&h=500&s=1");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Background Image for Slide 3 */
+.slider_bg_3 {
+    background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20231003/pngtree-a-3d-render-illustration-of-the-all-india-war-memorial-commonly-image_13566303.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/*Dark mode */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Style for the Dark Mode Button 
+<!-- #dark-mode-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px 15px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#dark-mode-toggle:hover {
+    background: #0056b3;
+} */
+
+    </style>
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-2 col-lg-2">
+                                <div class="logo">
+                                    <a href="index.html">
+                                        <img src="{%static 'img/logo.png'%}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6">
+                                <div class="main-menu  d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a class="active" href="index.html">home</a></li>
+                                            <li><a href="about.html">About</a></li>
+                                            <li><a href="contact.html">Contact</a></li>
+
+                                            {% if user.is_authenticated %}
+                                                <li>Hello, {{user.first_name}}</li>
+                                                <li><a href="accounts/logout">Logout</a></li>
+                                            {% else %}
+                                            <li><a href="accounts/register">Register</a></li>
+                                            <li><a href="accounts/login">Login</a></li>
+                                            {% endif %}
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 d-none d-lg-block">
+                                <div class="social_wrap d-flex align-items-center justify-content-end">
+                                    <div class="number">
+                                        <p> <i class="fa fa-phone"></i>9007340173 </p>
+                                    </div>
+                                    <div class="social_links d-none d-xl-block">
+                                        <ul>
+                                            <li><a href="#"> <i class="fa fa-instagram"></i> </a></li>
+                                            <li><a href="#"> <i class="fa fa-linkedin"></i> </a></li>
+                                            <li><a href="#"> <i class="fa fa-facebook"></i> </a></li>
+                                            <li><a href="#"> <i class="fa fa-google-plus"></i> </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="seach_icon">
+                                <a data-toggle="modal" data-target="#exampleModalCenter" href="#">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                            </div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+
+    <!-- slider_area_start -->
+    <div class="slider_area">
+        <div class="slider_active owl-carousel">
+            <div class="single_slider  d-flex align-items-center slider_bg_1 overlay">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-12 col-md-12">
+                            <div class="slider_text text-center">
+                                <h3>Kolkata</h3>
+                                <p>Pixel perfect design with awesome contents</p>
+                                <a href="#" class="boxed-btn3">Explore Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single_slider  d-flex align-items-center slider_bg_2 overlay">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-12 col-md-12">
+                            <div class="slider_text text-center">
+                                <h3>Mumbai</h3>
+                                <p>Pixel perfect design with awesome contents</p>
+                                <a href="#" class="boxed-btn3">Explore Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single_slider  d-flex align-items-center slider_bg_3 overlay">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-12 col-md-12">
+                            <div class="slider_text text-center">
+                                <h3>Delhi</h3>
+                                <p>Pixel perfect design with awesome contents</p>
+                                <a href="#" class="boxed-btn3">Explore Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- slider_area_end -->
+
+    <!-- where_togo_area_start  -->
+    <div class="where_togo_area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3">
+                    <div class="form_area">
+                        <h3>Where you want to go?</h3>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="search_wrap">
+                        <form class="search_form" action="#">
+                            <div class="input_field">
+                                <input type="text" placeholder="Where to go?">
+                            </div>
+                            <div class="input_field">
+                                <input id="datepicker" placeholder="Date">
+                            </div>
+                            <div class="input_field">
+                                <select>
+                                    <option data-display="Travel type">Travel type</option>
+                                    <option value="1">Some option</option>
+                                    <option value="2">Another option</option>
+                                </select>
+                            </div>
+                            <div class="search_btn">
+                                <button class="boxed-btn4 " type="submit" >Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- where_togo_area_end  -->
+    
+    <!-- popular_destination_area_start  -->
+    <div class="popular_destination_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title text-center mb_70">
+                        <h3>Popular Destination</h3>
+                        <p><i>From iconic landmarks to hidden paradises, explore the most popular destinations that define India's rich tapestry of culture, history, and natural beauty. 🌍✨</i></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for pop in pops%}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single_destination">
+                            <div class="thumb">
+                                <img src="{{pop.img.url}}" alt="">
+                            </div>
+                            <div class="content">
+                                <p class="d-flex align-items-center">{{pop.name}} <a href="travel_destination.html"> {{pop.plc}} Places</a> </p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div> 
+    <!-- popular_destination_area_end  -->
+
+    <!-- newletter_area_start  -->
+    <div class="newletter_area overlay">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-10">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5">
+                            <div class="newsletter_text">
+                                <h4>Subscribe Our Newsletter</h4>
+                                <p>Subscribe newsletter to get offers and about
+                                    new places to discover.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="mail_form">
+                                <div class="row no-gutters">
+                                    <div class="col-lg-9 col-md-8">
+                                        <div class="newsletter_field">
+                                            <input type="email" placeholder="Your mail" >
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="newsletter_btn">
+                                            <button class="boxed-btn4 " type="submit" >Subscribe</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- newletter_area_end  -->
+
+    <div class="popular_places_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title text-center mb_70">
+                        <h3>Popular Places</h3>
+                        <p><i>Discover India’s most loved destinations, where every place tells a story of its own.</i></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Destination -->
+                {% for dest in dests %}
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_place">
+                        <div class="thumb">
+                            <img src="{{dest.img.url}}" alt="">
+                            
+                            {% if dest.offer %}
+                            <div class="spec_offer" ><a href="#">Special Offer!!</a></div>
+                            {% endif %}
+
+                            <a href="#" class="prise">Rs.{{dest.price}}</a>
+                        </div>
+                        <div class="place_info">
+                            {% if user.is_authenticated %}
+                                <a href="accounts\booking"><h3>{{dest.name}}</h3></a>
+                            {% else %}
+                                <a href="accounts\login"><h3>{{dest.name}}</h3></a>
+                            {% endif %}
+                            <p>{{dest.desc}}</p>
+                            <div class="rating_days d-flex justify-content-between">
+                                <span class="d-flex justify-content-center align-items-center">
+                                     <i class="fa fa-star"></i> 
+                                     <i class="fa fa-star"></i> 
+                                     <i class="fa fa-star"></i> 
+                                     <i class="fa fa-star"></i> 
+                                     <i class="fa fa-star"></i>
+                                     <a href="#">(20 Review)</a>
+                                </span>
+                                <div class="days">
+                                    <i class="fa fa-clock-o"></i>
+                                    <a href="#">{{dest.days}} Days</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+                
+            </div> 
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="more_place_btn text-center">
+                        <a class="boxed-btn4" href="#">More Places</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="video_area video_bg overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="video_wrap text-center">
+                        <h3>Enjoy Video</h3>
+                        <div class="video_icon">
+                            <a class="popup-video video_play_button" href="https://www.youtube.com/watch?v=f59dDEk57i0">
+                                <i class="fa fa-play"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="travel_variation_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_travel text-center">
+                        <div class="icon">
+                            <img src="{%static 'img/svg_icon/1.svg'%}" alt="">
+                        </div>
+                        <h3>Comfortable Journey</h3>
+                        <p>Sit back, relax, and let us take care of every mile—your comfort is our priority.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_travel text-center">
+                        <div class="icon">
+                            <img src="{%static 'img/svg_icon/2.svg'%}" alt="">
+                        </div>
+                        <h3>Luxuries Hotel</h3>
+                        <p>Indulge in opulence with handpicked stays that redefine luxury at every corner.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_travel text-center">
+                        <div class="icon">
+                            <img src="{%static 'img/svg_icon/3.svg'%}" alt="">
+                        </div>
+                        <h3>Travel Guide</h3>
+                        <p>Your ultimate companion to discovering hidden gems and crafting unforgettable adventures.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- testimonial_area  -->
+    <div class="testimonial_area">
+        <div class="review-container">
+            <div class="review-form">
+                <h3>Write a Review</h3>
+                <form action="{% url 'submit_review' %}" method="POST">
+                    {% csrf_token %}
+                    <textarea name="review_text" placeholder="Write your review..." required></textarea>
+                    <button type="submit">Submit Review</button>
+                </form>
+            </div>
+        
+            <!-- Right Side: View Reviews -->
+            <div class="review-list">
+                <h3>Recent Reviews</h3>
+                
+                {% for review in reviews %}
+                    <div class="review-box">
+                        <p><strong>{{ review.user.username }}</strong> said:</p>
+                        <p>{{ review.text }}</p>
+                        <p><small>{{ review.created_at }}</small></p>
+        
+                        <!-- Like Button -->
+                        <form action="{% url 'like_review' review.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit">
+                                👍 Like ({{ review.total_likes }})
+                            </button>
+                        </form>
+                    </div>
+                {% empty %}
+                    <p>No reviews yet. Be the first to review!</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- /testimonial_area  -->
+
+    <div class="title-container">
+        <h1>Recent Trips</h1>
+    </div>
+
+    <!-- Trip Cards -->
+    <div class="trip-cards">
+        {% for trip in trips %}
+            <div class="trip-card">
+                <div class="card-thumb">
+                    <img src="{{ trip.photo.url }}" alt="{{ trip.place_name }}">
+                </div>
+                <div class="card-info">
+                    <div class="card-date">
+                        <span>{{ trip.date|date:"M d, Y" }}</span>
+                    </div>
+                    <a href="#">
+                        <h3>{{ trip.description }}</h3>
+                    </a>
+                    <p><strong>{{ trip.first_name }}</strong> visited <em>{{ trip.place_name }}</em></p>
+                </div>
+            </div>
+            {% empty %}
+                <p class="no-trips">No trips shared yet. Be the first to share!</p>
+        {% endfor %}
+    </div>
+
+    <!-- Link to Add Trip -->
+    <div class="add-trip-link">
+        {% if user.is_authenticated %}
+            <a href="{% url 'add_trip' %}">Share Your Trip</a>
+        {% else %}
+            <a href="{% url 'login' %}">Share Your Trip</a>
+        {% endif %}
+    </div>
+    
+
+
+    <footer class="footer">
+        <div class="footer_top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-4 col-md-6 col-lg-4 ">
+                        <div class="footer_widget">
+                            <div class="footer_logo">
+                                <a href="#">
+                                    <img src="{%static 'img/footer_logo.png'%}" alt="">
+                                </a>
+                            </div>
+                            <p>5th flora, 700/D kings road, green <br> lane New York-1782 <br>
+                                <a href="#">+10 367 826 2567</a> <br>
+                                <a href="#">contact@carpenter.com</a>
+                            </p>
+                            <div class="socail_links">
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ti-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ti-twitter-alt"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-instagram"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-pinterest"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-youtube-play"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-2">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Company
+                            </h3>
+                            <ul class="links">
+                                <li><a href="#">Pricing</a></li>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#"> Gallery</a></li>
+                                <li><a href="#"> Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-lg-3">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Popular destination
+                            </h3>
+                            <ul class="links double_links">
+                                <li><a href="#">Indonesia</a></li>
+                                <li><a href="#">America</a></li>
+                                <li><a href="#">India</a></li>
+                                <li><a href="#">Switzerland</a></li>
+                                <li><a href="#">Italy</a></li>
+                                <li><a href="#">Canada</a></li>
+                                <li><a href="#">Franch</a></li>
+                                <li><a href="#">England</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-lg-3">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Instagram
+                            </h3>
+                            <div class="instagram_feed">
+                                <div class="single_insta">
+                                    <a href="#">
+                                        <img src="{%static 'img/instagram/1.png'%}" alt="">
+                                    </a>
+                                </div>
+                                <div class="single_insta">
+                                    <a href="#">
+                                        <img src="{%static 'img/instagram/2.png'%}" alt="">
+                                    </a>
+                                </div>
+                                <div class="single_insta">
+                                    <a href="#">
+                                        <img src="{%static 'img/instagram/3.png'%}" alt="">
+                                    </a>
+                                </div>
+                                <div class="single_insta">
+                                    <a href="#">
+                                        <img src="{%static 'img/instagram/4.png'%}" alt="">
+                                    </a>
+                                </div>
+                                <div class="single_insta">
+                                    <a href="#">
+                                        <img src="{%static 'img/instagram/5.png'%}" alt="">
+                                    </a>
+                                </div>
+                                <div class="single_insta">
+                                    <a href="#">
+                                        <img src="{%static 'img/instagram/6.png'%}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copy-right_text">
+            <div class="container">
+                <div class="footer_border"></div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <p class="copy_right text-center">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+  <!-- Modal -->
+  <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="serch_form">
+            <input type="text" placeholder="Search" >
+            <button type="submit">search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- link that opens popup -->
+<!--     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>
+
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"> </script> -->
+    <!-- JS here -->
+    <script src="{%static 'js/vendor/modernizr-3.5.0.min.js'%}"></script>
+    <script src="{%static 'js/vendor/jquery-1.12.4.min.js'%}"></script>
+    <script src="{%static 'js/popper.min.js'%}"></script>
+    <script src="{%static 'js/bootstrap.min.js'%}"></script>
+    <script src="{%static 'js/owl.carousel.min.js'%}"></script>
+    <script src="{%static 'js/isotope.pkgd.min.js'%}"></script>
+    <script src="{%static 'js/ajax-form.js'%}"></script>
+    <script src="{%static 'js/waypoints.min.js'%}"></script>
+    <script src="{%static 'js/jquery.counterup.min.js'%}"></script>
+    <script src="{%static 'js/imagesloaded.pkgd.min.js'%}"></script>
+    <script src="{%static 'js/scrollIt.js'%}"></script>
+    <script src="{%static 'js/jquery.scrollUp.min.js'%}"></script>
+    <script src="{%static 'js/wow.min.js'%}"></script>
+    <script src="{%static 'js/nice-select.min.js'%}"></script>
+    <script src="{%static 'js/jquery.slicknav.min.js'%}"></script>
+    <script src="{%static 'js/jquery.magnific-popup.min.js'%}"></script>
+    <script src="{%static 'js/plugins.js'%}"></script>
+    <script src="{%static 'js/gijgo.min.js'%}"></script>
+    <script src="{%static 'js/slick.min.js'%}"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    
+    <!--contact js-->
+    <script src="{%static 'js/contact.js'%}"></script>
+    <script src="{%static 'js/jquery.ajaxchimp.min.js'%}"></script>
+    <script src="{%static 'js/jquery.form.js'%}"></script>
+    <script src="{%static 'js/jquery.validate.min.js'%}"></script>
+    <script src="{%static 'js/mail-script.js'%}"></script>
+
+
+    <script src="{%static 'js/main.js'%}"></script>
+    <script>
+        $('#datepicker').datepicker({
+            iconsLibrary: 'fontawesome',
+            icons: {
+             rightIcon: '<span class="fa fa-caret-down"></span>'
+         }
+        });
+    </script>
+    <!-- <script>
+       document.addEventListener("DOMContentLoaded", function () {
+    const darkModeToggle = document.getElementById("dark-mode-toggle");
+    const body = document.body;
+
+    // Check if user has a saved preference
+    if (localStorage.getItem("darkMode") === "enabled") {
+        body.classList.add("dark-mode");
+    }
+
+    // Toggle dark mode on button click
+    darkModeToggle.addEventListener("click", function () {
+        body.classList.toggle("dark-mode");
+
+        // Save user preference in localStorage
+        if (body.classList.contains("dark-mode")) {
+            localStorage.setItem("darkMode", "enabled");
+        } else {
+            localStorage.setItem("darkMode", "disabled");
+        }
+    });
+}); -->
+    </script>
+</body>
+
+</html>
