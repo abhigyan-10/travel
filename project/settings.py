@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url 
+import dj_database_url  # type: ignore
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # DATABASE_URL = postgresql://traveldb_fksb_user:4rhvnvySb34dZffDIImbOS8J6rtfU72A@dpg-cuuu3ei3esus73aec1u0-a.oregon-postgres.render.com/traveldb_fksb
 # dj_database_url.config(default=os.getenv('DATABASE_URL'))
 DATABASES = {
-    'default':dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default':dj_database_url.config(default='postgresql://traveldb_fksb_user:4rhvnvySb34dZffDIImbOS8J6rtfU72A@dpg-cuuu3ei3esus73aec1u0-a.oregon-postgres.render.com/traveldb_fksb')
     # {
     #     'ENGINE': 'django.db.backends.postgresql',
     #     'NAME': 'travel',
