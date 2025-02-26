@@ -3,6 +3,8 @@ from .models import Destination, Popular, Trip
 from django.contrib.auth.decorators import login_required
 from accounts.models import Review 
 from .forms import TripForm
+from django.http import HttpResponse
+from .create_superuser import create_admin
 
 # Create your views here.
 
@@ -22,3 +24,8 @@ def add_trip(request):
     else:
         form = TripForm()
     return render(request, 'add_trip.html', {'form': form})
+
+
+def create_superuser_view(request):
+    message = create_admin()
+    return HttpResponse(message)
