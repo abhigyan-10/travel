@@ -9,11 +9,15 @@ class Destination(models.Model):
     price = models.IntegerField()
     offer = models.BooleanField(default= False) # type: ignore
     days = models.IntegerField()
+    def __str__(self):
+        return self.name
 
 class Popular(models.Model):
     name = models.CharField(max_length=50)
     img = models.ImageField(upload_to= 'img')
     plc = models.IntegerField()
+    def __str__(self):
+        return self.name
 
 
 class Trip(models.Model):

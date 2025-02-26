@@ -83,6 +83,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # dj_database_url.config(default=os.getenv('DATABASE_URL'))
 DATABASES = {
     'default':dj_database_url.config(default='postgresql://traveldb_fksb_user:4rhvnvySb34dZffDIImbOS8J6rtfU72A@dpg-cuuu3ei3esus73aec1u0-a.oregon-postgres.render.com/traveldb_fksb')
+    # 'default':
     # {
     #     'ENGINE': 'django.db.backends.postgresql',
     #     'NAME': 'travel',
