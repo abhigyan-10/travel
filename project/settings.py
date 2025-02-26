@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-7!y8loocvq3=#bv1($t)39l0i&2z9#ujket1p^e1so0exq*jb=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['travel-cwgb.onrender.com']
+ALLOWED_HOSTS = ['travel-cwgb.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -79,17 +79,17 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+# DATABASE_URL = postgresql://traveldb_fksb_user:4rhvnvySb34dZffDIImbOS8J6rtfU72A@dpg-cuuu3ei3esus73aec1u0-a.oregon-postgres.render.com/traveldb_fksb
+# dj_database_url.config(default=os.getenv('DATABASE_URL'))
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
-    # {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': os.environ.get('travel'),
-    #     'USER': os.environ.get('postgres'),
-    #     'PASSWORD' : os.environ.get('abhi2005'),
-    #     'HOST' : os.environ.get('localhost'),
-    #     'PORT' : os.environ.get('5432'),
-    # }
+    'default':{
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'travel',
+        'USER': 'postgres',
+        'PASSWORD' : 'abhi2005',
+        'HOST' : 'localhost',
+        # 'PORT' : os.environ.get('5432'),
+    }
 }
 
 
