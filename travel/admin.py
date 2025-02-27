@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Destination, Popular
+from .models import Destination, Popular, Trip
+from accounts.models import Booking, Review
 # Register your models here.
 
 
@@ -27,6 +28,9 @@ class PopularAdmin(admin.ModelAdmin):
     
     # Add filters for the list view
     list_filter = ('plc',)
-    
+
 admin.site.register(Destination)
 admin.site.register(Popular)
+admin.site.register(Trip)
+admin.site.register(Review)
+admin.site.register(Booking)

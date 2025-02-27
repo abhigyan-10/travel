@@ -1,10 +1,11 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 # from django.contrib.auth.models import User
 
 # Create your models here.
 class Destination(models.Model):
     name = models.CharField(max_length = 100) # type: ignore
-    img = models.ImageField(upload_to='img')
+    img = CloudinaryField('image')
     desc = models.TextField() # type: ignore
     price = models.IntegerField()
     offer = models.BooleanField(default= False) # type: ignore
@@ -14,7 +15,7 @@ class Destination(models.Model):
 
 class Popular(models.Model):
     name = models.CharField(max_length=50)
-    img = models.ImageField(upload_to= 'img')
+    img = CloudinaryField('image')
     plc = models.IntegerField()
     def __str__(self):
         return self.name
