@@ -29,3 +29,8 @@ def add_trip(request):
 def create_superuser_view(request):
     message = create_admin()
     return HttpResponse(message)
+
+def about(request):
+    reviews = Review.objects.order_by("-created_at")[:5] 
+    trips = Trip.objects.all().order_by('-date')  # Latest trips first
+    return render(request, 'travel/about.html',{'reviews': reviews, 'trips': trips})

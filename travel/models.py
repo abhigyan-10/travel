@@ -25,7 +25,7 @@ class Trip(models.Model):
     first_name = models.CharField(max_length=100)
     place_name = models.CharField(max_length=200)
     date = models.DateField()
-    photo = models.ImageField(upload_to='trip_photos/')
+    photo = CloudinaryField('image')
     description = models.TextField()
 
     def __str__(self):
